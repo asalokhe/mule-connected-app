@@ -1,2 +1,2 @@
-# mule-connected-app-demo
+# mule-connected-app
 Application demonstrating the connected app functionality.
