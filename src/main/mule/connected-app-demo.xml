@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="da8d98db-6d51-4201-8b67-01dacf91d503" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="connected-app-demoFlow" doc:id="30057d2f-f67b-49f3-8a23-b84e9b6665e0" >
+		<http:listener doc:name="/connected-app" doc:id="d1b61a09-6e4f-485e-a2c9-30ac853d3b68" config-ref="HTTP_Listener_config" path="/connected-app"/>
+		<logger level="INFO" doc:name="Request In" doc:id="6e55f2f3-5fbd-449b-ad57-a42673735b29" message='#["Request In"]'/>
+		<ee:transform doc:name="Transform Response Message" doc:id="86cacbab-64b0-4082-be0d-47831c79c908" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "Hello from connected app project demo: @ " ++ now()
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Response out" doc:id="4e298757-bea4-4f22-933d-6c959243bef7" message='#["Response out @" ++ write(payload, "application/json")]'/>
+	</flow>
+</mule>
