@@ -4,7 +4,8 @@
 - The use of connected apps comes side by side with the last version of Mule Maven Plugin, so you will need to use the version 3.4.0 or higher. 
 
 - Why connected Apps?
-    Before Connected Apps, credentials for a service account were stored in the CI/CD pipeline code. With Connected apps, there is no concept of a service account anymore.
+
+Before Connected Apps, credentials for a service account were stored in the CI/CD pipeline code. With Connected apps, there is no concept of a service account anymore.
 
 
 | Parameter | Description |	Required |
@@ -14,8 +15,9 @@
 | connectedAppGrantType | Specifies the only supported connection type: client_credentials. | Only when using Connected Apps credentials to login.|
 
 ## Prerequisite:
-1. Create a connected app with required scope. 
-   Note that the Connected App credentials must have the **Design Center Developer** access scope.
+1. Create a connected app with required scope.
+
+   Note that the connected App credentials must have the **Design Center Developer** access scope.
 2. Mule application cloudHubDeployment configuration with connectedApp settings. 
 ```sh
     <configuration>
@@ -34,8 +36,6 @@
     </configuration>
 ```
 
-
-
 ### Deploy application to cloudhub by using Connected App. 
 ```sh
     mvn clean package deploy -DmuleDeploy 
@@ -47,38 +47,9 @@
         -Denvironment=<<Environment>>
 ```
 
-### Deploy application to cloudhub using credentails defined in settings.xml file. 
-Maven **server** with Anypoint Platform credentials. This is only needed if you want to use your credentials stored in your Maven settings.xml file. This is not the Mule server name.
-
-snippet from pom.xml
-```sh
-    <configuration>
-        <cloudHubDeployment>
-            <uri>https://anypoint.mulesoft.com</uri>
-            <muleVersion>${app.runtime}</muleVersion>
-            ...
-            <server>${my.creds.id}</server>
-            ...
-        </cloudHubDeployment>
-    </configuration>
-```
-
-snippet from settings.xml
-```sh
-    <servers>
-        <server>
-            <id>my.creds.id</id>
-            <username>USERNAME</username>
-            <password>PASSWORD</password>
-        </server>
-    </servers>
-```
-
 ## References:
 -   https://docs.mulesoft.com/access-management/connected-apps-overview
 -   https://help.mulesoft.com/s/article/How-to-use-Connected-Apps-with-CI-CD
 -   https://docs.mulesoft.com/exchange/to-publish-assets-maven#publish-and-consume-federated-assets
 -   https://docs.mulesoft.com/mule-runtime/4.4/deploy-to-cloudhub
 
-## Error:
-> Execution default-deploy of goal org.mule.tools.maven:mule-maven-plugin:3.5.2:deploy failed: Please check whether you have the access rights to this business group. Please set the businessGroup in the plugin configuration in case your user have access only within a business unit.
