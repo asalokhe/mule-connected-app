@@ -5,7 +5,7 @@
 
 - Why connected Apps?
 
-Before Connected Apps, credentials for a service account were stored in the CI/CD pipeline code. With Connected apps, there is no concept of a service account anymore.
+    Before Connected Apps, credentials for a service account were stored in the CI/CD pipeline code. With Connected apps, there is no concept of a service account anymore.
 
 
 | Parameter | Description |	Required |
@@ -18,6 +18,9 @@ Before Connected Apps, credentials for a service account were stored in the CI/C
 1. Create a connected app with required scope.
 
    Note that the connected App credentials must have the **Design Center Developer** access scope.
+   
+   ![Connected-App](Images/Connected-App.png)
+
 2. Mule application cloudHubDeployment configuration with connectedApp settings. 
 ```sh
     <configuration>
